@@ -30,7 +30,10 @@ import { LightboxEvent, LIGHTBOX_EVENT, IAlbum, IEvent, LightboxWindowRef } from
     <div class="lb-dataContainer" [hidden]="ui.showReloader" #dataContainer>
       <div class="lb-data">
         <div class="lb-details">
-          <span class="lb-caption animation fadeIn" [hidden]="!ui.showCaption" [innerHtml]="album[currentImageIndex].caption" #caption>
+          <span class="lb-title animation fadeIn" [hidden]="!ui.showTitle" [innerHtml]="album[currentImageIndex].title" #title>
+          </span>
+          <span [ngClass]="{'lb-caption':!ui.showTitle, 'lb-title-caption':ui.showTitle}" class="animation fadeIn"
+            [hidden]="!ui.showCaption" [innerHtml]="album[currentImageIndex].caption" #caption>
           </span>
           <span class="lb-number animation fadeIn" [hidden]="!ui.showPageNumber" #number>{{ content.pageNumber }}</span>
         </div>
@@ -57,6 +60,7 @@ export class LightboxComponent implements AfterViewInit, OnDestroy, OnInit {
   @ViewChild('navArrow') _navArrowElem: ElementRef;
   @ViewChild('dataContainer') _dataContainerElem: ElementRef;
   @ViewChild('image') _imageElem: ElementRef;
+  @ViewChild('title') _titleElem: ElementRef;
   @ViewChild('caption') _captionElem: ElementRef;
   @ViewChild('number') _numberElem: ElementRef;
   public content: any;
@@ -96,6 +100,7 @@ export class LightboxComponent implements AfterViewInit, OnDestroy, OnInit {
       // control whether to show the
       // page number or not
       showPageNumber: false,
+      showTitle: false,
       showCaption: false,
       classList: 'lightbox animation fadeIn'
     };
@@ -382,6 +387,10 @@ export class LightboxComponent implements AfterViewInit, OnDestroy, OnInit {
       '-webkit-animation-duration', `${fadeDuration}s`);
     this._rendererRef.setElementStyle(this._imageElem.nativeElement,
       'animation-duration', `${fadeDuration}s`);
+    this._rendererRef.setElementStyle(this._titleElem.nativeElement,
+      '-webkit-animation-duration', `${fadeDuration}s`);
+    this._rendererRef.setElementStyle(this._titleElem.nativeElement,
+      'animation-duration', `${fadeDuration}s`);
     this._rendererRef.setElementStyle(this._captionElem.nativeElement,
       '-webkit-animation-duration', `${fadeDuration}s`);
     this._rendererRef.setElementStyle(this._captionElem.nativeElement,
@@ -403,6 +412,12 @@ export class LightboxComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   private _updateDetails(): void {
+    // update the title
+    if (typeof this.album[this.currentImageIndex].title !== 'undefined' &&
+      this.album[this.currentImageIndex].title !== '') {
+        this.ui.showTitle = true;
+      }
+
     // update the caption
     if (typeof this.album[this.currentImageIndex].caption !== 'undefined' &&
       this.album[this.currentImageIndex].caption !== '') {
@@ -436,6 +451,7 @@ export class LightboxComponent implements AfterViewInit, OnDestroy, OnInit {
     this.ui.showLeftArrow = false;
     this.ui.showRightArrow = false;
     this.ui.showPageNumber = false;
+    this.ui.showTitle = false;
     this.ui.showCaption = false;
   }
 

@@ -175,13 +175,26 @@ html.lb-disable-scrolling {
   line-height: 1.1em;
 }
 
+.lb-data .lb-title {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1em;
+}
+
+.lb-data .lb-title-caption {
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1em;
+}
+
 .lb-data .lb-caption {
   font-size: 13px;
   font-weight: bold;
   line-height: 1em;
 }
 
-.lb-data .lb-caption a {
+.lb-data .lb-title a, .lb-data .lb-caption a, .lb-data .lb-title-caption a {
   color: #4ae;
 }
 
