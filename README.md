@@ -51,10 +51,12 @@ export class AppComponent {
   constructor(private _lightbox: Lightbox) {
     for (let i = 1; i <= 4; i++) {
       const src = 'demo/img/image' + i + '.jpg';
+      const title = 'Title ' + i + ' title here';
       const caption = 'Image ' + i + ' caption here';
       const thumb = 'demo/img/image' + i + '-thumb.jpg';
       const album = {
          src: src,
+         title: title,
          caption: caption,
          thumb: thumb
       };
@@ -81,6 +83,7 @@ Each `object` of `album` array inside your component may contains 3 properties :
 Properties | Requirement | Description
 ----------|-------------|------------
 src | Required | The source image to your thumbnail that you want to with use lightbox when user click on `thumbnail` image
+title | Optional | Your title corresponding with your image
 caption | Optional | Your caption corresponding with your image 
 thumb | Optional | Source of your thumbnail. It is being used inside your component markup so this properties depends on your naming.
 

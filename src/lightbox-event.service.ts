@@ -8,6 +8,7 @@ export interface IEvent {
 
 export interface IAlbum {
   src: string;
+  title?: string;
   caption?: string;
   thumb: string;
 }

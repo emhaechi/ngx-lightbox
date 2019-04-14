@@ -26,10 +26,12 @@ export class AppComponent {
     this.albums = [];
     for (let i = 1; i <= 4; i++) {
       const src = 'demo/img/image' + i + '.jpg';
+      const title = 'Image ' + i + ' title here';
       const caption = 'Image ' + i + ' caption here';
       const thumb = 'demo/img/image' + i + '-thumb.jpg';
-      const album = {
+      const album: IAlbum = {
          src: src,
+         title: title,
          caption: caption,
          thumb: thumb
       };
